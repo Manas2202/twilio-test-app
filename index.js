@@ -8,11 +8,9 @@ const twilio = require('twilio');
 const ClientCapability = twilio.jwt.ClientCapability;
 const VoiceResponse = twilio.twiml.VoiceResponse;
 require('dotenv-safe').load();
-
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-
 
 let app = express();
 app.use(express.static(__dirname + '/public'));
@@ -24,7 +22,6 @@ app.get('/token', (request, response) => {
     accountSid: process.env.TWILIO_ACCOUNT_SID,
     authToken: process.env.TWILIO_AUTH_TOKEN,
   });
-
   capability.addScope(
     new ClientCapability.OutgoingClientScope({
       applicationSid: process.env.TWILIO_TWIML_APP_SID})
@@ -35,32 +32,13 @@ app.get('/token', (request, response) => {
   });
 });
 
-// app.get('/testurl', (request, response) => {
-//   client.calls
-//       .create({
-//          twiml: '<Response><Say>Ahoy, World!</Say></Response>',
-//          url: 'http://demo.twilio.com/docs/classic.mp3',
-//          to: '+917089011423',
-//          from: '+13608545661'
-//        })
-//       .then(call => console.log(call.sid))
-//       .catch(err => console.log(err));
-//   response.send({
-//     token: 'test',
-//   });
-// })
-
 // Create TwiML for outbound calls
-app.post('https://twilio-test-qeozlwenu-manas2202.vercel.app/voice', (request, response) => {
+app.post('https://c276-59-95-128-194.in.ngrok.io/voice', (request, response) => {
   let voiceResponse = new VoiceResponse();
   voiceResponse.dial({
-    callerId: process.env.TWILIO_NUMBER,
+    callerId: process.env.TWILIO_NUMBER
   }, request.body.number);
-  response.type('text/html');
-  // response headers
-  // response.set('Content-Type', 'audio/x-wav');
-  // response.set('Content-Disposition', 'attachment; filename=hello.wav');
-  // response.set('Content-Length', '1234');
+  response.type('text/xml');
   response.send(voiceResponse.toString());  
 });
 
