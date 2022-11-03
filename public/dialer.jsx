@@ -1,3 +1,4 @@
+// Import Twilio
 var NumberInputText = React.createClass({
   render: function () {
     return (
@@ -154,7 +155,7 @@ var DialerApp = React.createClass({
     var self = this;
 
     // Fetch Twilio capability token from our Node.js server
-    $.getJSON('http://localhost:3000/token').done(function (data) {
+    $.getJSON('/token').done(function (data) {
       console.log(data);
       Twilio.Device.setup(data.token);
     }).fail(function (err) {
@@ -195,6 +196,7 @@ var DialerApp = React.createClass({
     Twilio.Device.activeConnection().mute(muted);
   },
   handleToggleCall() {
+      
     if (!this.state.onPhone) {
       console.log("checked");
       this.setState({
@@ -204,6 +206,7 @@ var DialerApp = React.createClass({
       var n = '+' + this.state.countryCode + this.state.currentNumber.replace(/\D/g, '');
       Twilio.Device.connect({ number: n });
       this.setState({ log: 'Calling ' + n })
+      console.log(Twilio);
     } else {
       Twilio.Device.disconnectAll();
     }
