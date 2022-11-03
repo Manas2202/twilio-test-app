@@ -34,20 +34,12 @@ app.get('/token', (request, response) => {
 
 // Create TwiML for outbound calls
 app.post('/voice', (request, response) => {
-  // let voiceResponse = new VoiceResponse();
-  // voiceResponse.dial({
-  //   callerId: process.env.TWILIO_NUMBER,
-  // }, request.body.number);
-  // response.type('text/xml');
-  // response.send(voiceResponse.toString());
-
-  const VoiceResponse = require('twilio').twiml.VoiceResponse;
-  const response = new VoiceResponse();
-  const dial = response.dial({
+  let voiceResponse = new VoiceResponse();
+  voiceResponse.dial({
     callerId: process.env.TWILIO_NUMBER,
-  });
-  dial.client(req.body.To);
-  res.send(response.toString()); 
+  }, request.body.number);
+  response.type('text/xml');
+  response.send(voiceResponse.toString());  
 });
 
 app.use((error, req, res, next) => {
