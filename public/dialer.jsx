@@ -154,7 +154,7 @@ var DialerApp = React.createClass({
     var self = this;
 
     // Fetch Twilio capability token from our Node.js server
-    document.getJSON('http://localhost:3000/token').done(function (data) {
+    $.getJSON('http://localhost:3000/token').done(function (data) {
       console.log(data);
       Twilio.Device.setup(data.token);
     }).fail(function (err) {
