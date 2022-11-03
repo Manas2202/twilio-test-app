@@ -23,10 +23,7 @@ app.get('/token', (request, response) => {
     new ClientCapability.OutgoingClientScope({
       applicationSid: process.env.TWILIO_TWIML_APP_SID})
   );
-
   const token = capability.toJwt();
-
-  // Include token in a JSON response
   response.send({
     token: token,
   });
