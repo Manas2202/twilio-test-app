@@ -156,7 +156,7 @@ var DialerApp = React.createClass({
     // Fetch Twilio capability token from our Node.js server
     $.getJSON('/token').done(function (data) {
       console.log(data);
-      Twilio.Device.setup("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6InNjb3BlOmNsaWVudDpvdXRnb2luZz9hcHBTaWQ9QVA3ZjQwY2FlMDMxYTgzZmMyNTc5ZGVhNDAwY2I5YzVmYSIsImlzcyI6IkFDNTc5YTc2ZTgwMWM1ZWQzMjE5ODUyYjc4ZGQ3ZjNmZjkiLCJleHAiOjE2Njc0NzYyMzQsImlhdCI6MTY2NzQ3MjYzNH0.INLEHQX9vdU-0guuvtcxmSuVjNw6ZvxDdkEnNybRj5g");
+      Twilio.Device.setup(data.token);
     }).fail(function (err) {
       console.log(err);
       self.setState({ log: 'Could not fetch token, see console.log' });
