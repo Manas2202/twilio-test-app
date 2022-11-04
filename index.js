@@ -33,7 +33,7 @@ app.get('/token', (request, response) => {
 });
 
 // Create TwiML for outbound calls
-app.post('https://c276-59-95-128-194.in.ngrok.io/voice', (request, response) => {
+app.post('/voice', (request, response) => {
   let voiceResponse = new VoiceResponse();
   voiceResponse.dial({
     callerId: process.env.TWILIO_NUMBER

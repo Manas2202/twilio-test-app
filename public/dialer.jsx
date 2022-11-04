@@ -196,7 +196,6 @@ var DialerApp = React.createClass({
     Twilio.Device.activeConnection().mute(muted);
   },
   handleToggleCall() {
-      
     if (!this.state.onPhone) {
       console.log("checked");
       this.setState({
